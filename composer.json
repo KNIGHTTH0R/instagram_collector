@@ -1,0 +1,6 @@
+{
+  "require": {
+    "robledocampos/api_client": "dev-master",
+    "silex/silex": "~2.0"
+  }
+}
