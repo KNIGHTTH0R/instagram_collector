@@ -1,6 +1,14 @@
 {
   "require": {
     "robledocampos/api_client": "dev-master",
-    "silex/silex": "~2.0"
+    "silex/silex": "~2.0",
+    "doctrine/orm": "^2.5",
+    "doctrine/dbal": "^2.5",
+    "symfony/yaml": "^3.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "App/"
+    }
   }
 }
