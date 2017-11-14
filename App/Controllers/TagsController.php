@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Silex\Application;
 
-class WelcomeController
+class TagsController
 {
     /**
      * Render welcome view.

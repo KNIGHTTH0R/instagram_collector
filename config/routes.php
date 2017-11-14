@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__.'/bootstrap.php';
 
-$app->get('/', '\App\Controllers\WelcomeController::Index');
+$app->get('/users/self', '\App\Controllers\UsersController::self');
 
-//$app->get('/hello/{name}', function ($name) use ($app) {
+//$app->get('/users/self{name}', function () use () {
 //    return 'Hello '.$app->escape($name);
 //});
