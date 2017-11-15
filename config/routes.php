@@ -11,21 +11,26 @@ $app->get('/users/{userId}',
 )
     ->value('userId', '');
 
-$app->get('/users/{userId}/recentmedia',
-    function ($userId = "") {
+$app->get('/users/{userId}/recentmedia/{count}/{maxId}/{minId}',
+    function ($userId = "", $count = null, $maxId = null, $minId = null) {
         $controller = new App\Controllers\UsersController();
-        return $controller->getRecentMedia($userId);
+        return $controller->getRecentMedia($userId, $count, $maxId, $minId);
     }
 )
-    ->value('userId', '');
+    ->value('userId', '')
+    ->value('count', null)
+    ->value('maxId', null)
+    ->value('minId', null);
 
-$app->get('/users/search/{query}',
-    function ($query = "") {
+$app->get('/users/search/{query}/{count}',
+    function ($query = "", $count = null) {
         $controller = new App\Controllers\UsersController();
-        return $controller->search($query);
+        return $controller->search($query, $count);
     }
 )
-    ->value('userId', '');
+    ->value('query', '')
+    ->value('count', null);
+
 
 //$app->get('/users/self{name}', function () use () {
 //    return 'Hello '.$app->escape($name);

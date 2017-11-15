@@ -53,7 +53,7 @@ class UsersController
         die;
     }
 
-    public function getRecentMedia($userId, $maxId = null, $minId = null, $count = null)
+    public function getRecentMedia($userId, $count = null, $maxId = null, $minId = null)
     {
         if (!is_numeric($userId)) {
             $errorHelper = new Helpers\ErrorHelper();
@@ -63,9 +63,9 @@ class UsersController
         }
         $apiClient = new ApiClient(API_URL);
         $parameters['access_token'] = ACCESS_TOKEN;
-        if (!empty($maxId)) $parameters['max_id'] = $maxId;
-        if (!empty($minId)) $parameters['min_id'] = $minId;
-        if (!empty($count)) $parameters['count'] = $count;
+        if (!is_null($maxId)) $parameters['max_id'] = $maxId;
+        if (!is_null($minId)) $parameters['min_id'] = $minId;
+        if (isset($count)) $parameters['count'] = $count;
         $response = $apiClient->call(
             "users/".$userId."/media/recent/",
             $parameters,
@@ -84,8 +84,8 @@ class UsersController
     {
         $apiClient = new ApiClient(API_URL);
         $parameters['access_token'] = ACCESS_TOKEN;
-        if (!empty($maxLikeId)) $parameters['max_like_id'] = $minId;
-        if (!empty($count)) $parameters['count'] = $count;
+        if (!is_null($maxLikeId)) $parameters['max_like_id'] = $minId;
+        if (!is_null($count)) $parameters['count'] = $count;
         $response = $apiClient->call(
             "users/self/media/liked",
             $parameters,
@@ -99,7 +99,6 @@ class UsersController
         print_r($response);
         die;
     }
-
 
     public function search($query, $count = null)
     {
