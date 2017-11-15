@@ -52,3 +52,4 @@ $app->get('/users/search/{query}/{count}',
 
 $app->get('/users/self/follows', '\App\Controllers\RelationshipsController::follows');
 $app->get('/users/self/followedby', '\App\Controllers\RelationshipsController::followedBy');
+$app->get('/users/self/requestedby', '\App\Controllers\RelationshipsController::requestedBy');

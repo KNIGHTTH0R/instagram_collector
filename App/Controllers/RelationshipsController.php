@@ -47,4 +47,23 @@ class RelationshipsController
         die;
     }
 
+    public function requestedBy()
+    {
+        $apiClient = new ApiClient(API_URL);
+        $parameters['access_token'] = ACCESS_TOKEN;
+        $response = $apiClient->call(
+            "users/self/requested-by",
+            $parameters,
+            null,
+            null,
+            null,
+            "GET",
+            true
+        );
+
+        print_r($response);
+        die;
+    }
+
+
 }
