@@ -54,10 +54,18 @@ $app->get('/users/self/follows', '\App\Controllers\RelationshipsController::foll
 $app->get('/users/self/followedby', '\App\Controllers\RelationshipsController::followedBy');
 $app->get('/users/self/requestedby', '\App\Controllers\RelationshipsController::requestedBy');
 
-$app->get('/users/{userId}/relationship',
+$app->get('/users/{userId}/relationship/get',
     function ($userId = "") {
     $controller = new App\Controllers\RelationshipsController();
         return $controller->getUserRelationships($userId);
+    }
+)
+    ->value('userId', '');
+
+$app->post('/users/{userId}/relationship/post',
+    function ($userId = "", $action = "") {
+        $controller = new App\Controllers\RelationshipsController();
+        return $controller->postUserRelationships($userId, $action);
     }
 )
     ->value('userId', '');
