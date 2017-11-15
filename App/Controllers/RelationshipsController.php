@@ -29,6 +29,22 @@ class RelationshipsController
         die;
     }
 
+    public function followedBy()
+    {
+        $apiClient = new ApiClient(API_URL);
+        $parameters['access_token'] = ACCESS_TOKEN;
+        $response = $apiClient->call(
+            "users/self/followed-by",
+            $parameters,
+            null,
+            null,
+            null,
+            "GET",
+            true
+        );
 
+        print_r($response);
+        die;
+    }
 
 }
