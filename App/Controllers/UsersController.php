@@ -14,9 +14,7 @@ class UsersController
     public function self()
     {
         $apiClient = new ApiClient(API_URL);
-        $parameters = [
-            'access_token' => ACCESS_TOKEN
-        ];
+        $parameters['access_token'] = ACCESS_TOKEN;
         $response = $apiClient->call(
             "users/self",
             $parameters,
@@ -31,7 +29,7 @@ class UsersController
         die;
     }
 
-    public function getUser($userId)
+    public function get($userId)
     {
         if (!is_numeric($userId)) {
             $errorHelper = new Helpers\ErrorHelper();
@@ -40,9 +38,7 @@ class UsersController
             return $response;
         }
         $apiClient = new ApiClient(API_URL);
-        $parameters = [
-            'access_token' => ACCESS_TOKEN
-        ];
+        $parameters['access_token'] = ACCESS_TOKEN;
         $response = $apiClient->call(
             "users/".$userId,
             $parameters,
@@ -57,7 +53,7 @@ class UsersController
         die;
     }
 
-    public function getRecentMedia($userId)
+    public function getRecentMedia($userId, $maxId = null, $minId = null, $count = null)
     {
         if (!is_numeric($userId)) {
             $errorHelper = new Helpers\ErrorHelper();
@@ -66,9 +62,10 @@ class UsersController
             return $response;
         }
         $apiClient = new ApiClient(API_URL);
-        $parameters = [
-            'access_token' => ACCESS_TOKEN
-        ];
+        $parameters['access_token'] = ACCESS_TOKEN;
+        if (!empty($maxId)) $parameters['max_id'] = $maxId;
+        if (!empty($minId)) $parameters['min_id'] = $minId;
+        if (!empty($count)) $parameters['count'] = $count;
         $response = $apiClient->call(
             "users/".$userId."/media/recent/",
             $parameters,
@@ -81,6 +78,48 @@ class UsersController
 
         print_r($response);
         die;
+    }
 
+    public function getLikedMedia($maxLikeId = null, $count = null)
+    {
+        $apiClient = new ApiClient(API_URL);
+        $parameters['access_token'] = ACCESS_TOKEN;
+        if (!empty($maxLikeId)) $parameters['max_like_id'] = $minId;
+        if (!empty($count)) $parameters['count'] = $count;
+        $response = $apiClient->call(
+            "users/self/media/liked",
+            $parameters,
+            null,
+            null,
+            null,
+            "GET",
+            true
+        );
+
+        print_r($response);
+        die;
+    }
+
+
+    public function search($query, $count = null)
+    {
+        $apiClient = new ApiClient(API_URL);
+        $parameters = [
+            'q' => $query,
+            'access_token' => ACCESS_TOKEN
+        ];
+        if (!empty($count)) $parameters['count'] = $count;
+        $response = $apiClient->call(
+            "users/search",
+            $parameters,
+            null,
+            null,
+            null,
+            "GET",
+            true
+        );
+
+        print_r($response);
+        die;
     }
 }
