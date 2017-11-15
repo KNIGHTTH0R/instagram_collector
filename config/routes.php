@@ -11,6 +11,16 @@ $app->get('/users/{userId}',
 )
     ->value('userId', '');
 
+$app->get('/users/self/recentmedia/{count}/{maxId}/{minId}',
+    function ($count = null, $maxId = null, $minId = null) {
+        $controller = new App\Controllers\UsersController();
+        return $controller->getSelfRecentMedia($count, $maxId, $minId);
+    }
+)
+    ->value('count', null)
+    ->value('maxId', null)
+    ->value('minId', null);
+
 $app->get('/users/{userId}/recentmedia/{count}/{maxId}/{minId}',
     function ($userId = "", $count = null, $maxId = null, $minId = null) {
         $controller = new App\Controllers\UsersController();

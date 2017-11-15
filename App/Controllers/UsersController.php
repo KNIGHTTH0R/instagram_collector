@@ -53,6 +53,27 @@ class UsersController
         die;
     }
 
+    public function getSelfRecentMedia($count = null, $maxId = null, $minId = null)
+    {
+        $apiClient = new ApiClient(API_URL);
+        $parameters['access_token'] = ACCESS_TOKEN;
+        if (isset($maxId)) $parameters['max_id'] = $maxId;
+        if (isset($minId)) $parameters['min_id'] = $minId;
+        if (isset($count)) $parameters['count'] = $count;
+        $response = $apiClient->call(
+            "users/self/media/recent/",
+            $parameters,
+            null,
+            null,
+            null,
+            "GET",
+            true
+        );
+
+        print_r($response);
+        die;
+    }
+
     public function getRecentMedia($userId, $count = null, $maxId = null, $minId = null)
     {
         if (!is_numeric($userId)) {
@@ -63,8 +84,8 @@ class UsersController
         }
         $apiClient = new ApiClient(API_URL);
         $parameters['access_token'] = ACCESS_TOKEN;
-        if (!is_null($maxId)) $parameters['max_id'] = $maxId;
-        if (!is_null($minId)) $parameters['min_id'] = $minId;
+        if (isset($maxId)) $parameters['max_id'] = $maxId;
+        if (isset($minId)) $parameters['min_id'] = $minId;
         if (isset($count)) $parameters['count'] = $count;
         $response = $apiClient->call(
             "users/".$userId."/media/recent/",
@@ -84,8 +105,8 @@ class UsersController
     {
         $apiClient = new ApiClient(API_URL);
         $parameters['access_token'] = ACCESS_TOKEN;
-        if (!is_null($maxLikeId)) $parameters['max_like_id'] = $minId;
-        if (!is_null($count)) $parameters['count'] = $count;
+        if (isset($maxLikeId)) $parameters['max_like_id'] = $minId;
+        if (isset($count)) $parameters['count'] = $count;
         $response = $apiClient->call(
             "users/self/media/liked",
             $parameters,
