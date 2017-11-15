@@ -105,7 +105,7 @@ class UsersController
     {
         $apiClient = new ApiClient(API_URL);
         $parameters['access_token'] = ACCESS_TOKEN;
-        if (isset($maxLikeId)) $parameters['max_like_id'] = $minId;
+        if (isset($maxLikeId)) $parameters['max_like_id'] = $maxLikeId;
         if (isset($count)) $parameters['count'] = $count;
         $response = $apiClient->call(
             "users/self/media/liked",

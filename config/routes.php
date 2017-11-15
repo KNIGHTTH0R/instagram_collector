@@ -32,6 +32,15 @@ $app->get('/users/{userId}/recentmedia/{count}/{maxId}/{minId}',
     ->value('maxId', null)
     ->value('minId', null);
 
+$app->get('/users/self/media/liked/{count}/{maxLikeId}',
+    function ($count = null, $maxLikeId = null) {
+        $controller = new App\Controllers\UsersController();
+        return $controller->getLikedMedia($count, $maxLikeId);
+    }
+)
+    ->value('count', null)
+    ->value('maxLikeId', null);
+
 $app->get('/users/search/{query}/{count}',
     function ($query = "", $count = null) {
         $controller = new App\Controllers\UsersController();
