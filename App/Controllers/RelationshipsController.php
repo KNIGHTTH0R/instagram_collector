@@ -65,5 +65,22 @@ class RelationshipsController
         die;
     }
 
+    public function getUserRelationships($userId)
+    {
+        $apiClient = new ApiClient(API_URL);
+        $parameters['access_token'] = ACCESS_TOKEN;
+        $response = $apiClient->call(
+            "users/".$userId."/relationship",
+            $parameters,
+            null,
+            null,
+            null,
+            "GET",
+            true
+        );
+
+        print_r($response);
+        die;
+    }
 
 }

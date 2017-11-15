@@ -35,7 +35,8 @@ class UsersController
             $errorHelper = new Helpers\ErrorHelper();
             $response = $errorHelper->buildError(400, "userId must be numeric");
 
-            return $response;
+            print_r($response);
+            die;
         }
         $apiClient = new ApiClient(API_URL);
         $parameters['access_token'] = ACCESS_TOKEN;
@@ -80,7 +81,8 @@ class UsersController
             $errorHelper = new Helpers\ErrorHelper();
             $response = $errorHelper->buildError(400, "userId must be numeric");
 
-            return $response;
+            print_r($response);
+            die;
         }
         $apiClient = new ApiClient(API_URL);
         $parameters['access_token'] = ACCESS_TOKEN;
