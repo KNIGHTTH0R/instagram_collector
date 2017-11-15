@@ -59,6 +59,12 @@ class UsersController
 
     public function getRecentMedia($userId)
     {
+        if (!is_numeric($userId)) {
+            $errorHelper = new Helpers\ErrorHelper();
+            $response = $errorHelper->buildError(400, "userId must be numeric");
+
+            return $response;
+        }
         $apiClient = new ApiClient(API_URL);
         $parameters = [
             'access_token' => ACCESS_TOKEN

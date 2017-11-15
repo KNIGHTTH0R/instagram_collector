@@ -11,6 +11,14 @@ $app->get('/users/{userId}',
 )
     ->value('userId', '');
 
+$app->get('/users/{userId}/recentmedia',
+    function ($userId = "") {
+        $controller = new App\Controllers\UsersController();
+        return $controller->getRecentMedia($userId);
+    }
+)
+    ->value('userId', '');
+
 //$app->get('/users/self{name}', function () use () {
 //    return 'Hello '.$app->escape($name);
 //});
