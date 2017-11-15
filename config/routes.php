@@ -69,3 +69,19 @@ $app->post('/users/{userId}/relationship/post',
     }
 )
     ->value('userId', '');
+
+$app->get('/media/getbyid/{mediaId}',
+    function ($mediaId = "") {
+        $controller = new App\Controllers\MediaController();
+        return $controller->getById($mediaId);
+    }
+)
+    ->value('mediaId', '');
+
+$app->get('/media/getbyshortcode/{shortCode}',
+    function ($shortCode = "") {
+        $controller = new App\Controllers\MediaController();
+        return $controller->getByShortCode($shortCode);
+    }
+)
+    ->value('shortCode', '');

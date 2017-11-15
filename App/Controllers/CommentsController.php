@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Silex\Application;
 
-class MediaController
+class CommentsController
 {
     /**
      * Render welcome view.
