@@ -3,19 +3,32 @@
 namespace App\Controllers;
 
 use Silex\Application;
+use HttpApiClient\ApiClient;
+use App\Helpers;
+
+require_once __DIR__."/../../config/config.php";
 
 class RelationshipsController
 {
-    /**
-     * Render welcome view.
-     *
-     * @param &nbsp;Application $app Silex\Application
-     *
-     */
-    public function Index(Application $app)
-    {
-        $render = "<strong>Welcome!</strong></br></br>";
 
-        return $render;
+    public function follows()
+    {
+        $apiClient = new ApiClient(API_URL);
+        $parameters['access_token'] = ACCESS_TOKEN;
+        $response = $apiClient->call(
+            "users/self/follows",
+            $parameters,
+            null,
+            null,
+            null,
+            "GET",
+            true
+        );
+
+        print_r($response);
+        die;
     }
+
+
+
 }

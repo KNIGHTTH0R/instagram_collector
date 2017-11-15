@@ -50,7 +50,4 @@ $app->get('/users/search/{query}/{count}',
     ->value('query', '')
     ->value('count', null);
 
-
-//$app->get('/users/self{name}', function () use () {
-//    return 'Hello '.$app->escape($name);
-//});
+$app->get('/users/self/follows', '\App\Controllers\RelationshipsController::follows');
